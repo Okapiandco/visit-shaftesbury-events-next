@@ -29,10 +29,21 @@ interface ParsedEvent {
 }
 
 const SCRAPE_SECRET = process.env.REVALIDATION_SECRET
+const CRON_SECRET = process.env.CRON_SECRET
 
+// GET handler for Vercel Cron Jobs (runs every Monday at 9am)
+export async function GET(request: NextRequest) {
+  const authHeader = request.headers.get('authorization')
+  if (authHeader !== `Bearer ${CRON_SECRET}`) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+  }
+
+  return scrapeEvents('https://shaftesburyartscentre.org.uk/wp-json/wp/v2/ajde_events?per_page=20&_embed')
+}
+
+// POST handler for manual triggers
 export async function POST(request: NextRequest) {
   try {
-    // Auth check
     const body = await request.json().catch(() => ({}))
     const secret = body.secret || request.headers.get('x-scrape-secret')
 
@@ -41,6 +52,19 @@ export async function POST(request: NextRequest) {
     }
 
     const sourceUrl = body.sourceUrl || 'https://shaftesburyartscentre.org.uk/wp-json/wp/v2/ajde_events?per_page=20&_embed'
+
+    return scrapeEvents(sourceUrl)
+  } catch (error) {
+    console.error('Scrape error:', error)
+    return NextResponse.json(
+      { error: `Scrape failed: ${error instanceof Error ? error.message : 'unknown'}` },
+      { status: 500 }
+    )
+  }
+}
+
+async function scrapeEvents(sourceUrl: string) {
+  try {
 
     // 1. Fetch events from WordPress REST API
     const wpResponse = await fetch(sourceUrl, {
