@@ -95,11 +95,6 @@ export default defineType({
       },
       initialValue: 'pending',
       validation: (Rule) => Rule.required(),
-      readOnly: ({ currentUser }) => {
-        return !currentUser?.roles?.find(role =>
-          role.name === 'administrator'
-        )
-      }
     }),
     defineField({
       name: 'isFeatured',
@@ -107,11 +102,6 @@ export default defineType({
       type: 'boolean',
       initialValue: false,
       description: 'Featured businesses appear prominently in the directory',
-      readOnly: ({ currentUser }) => {
-        return !currentUser?.roles?.find(role =>
-          role.name === 'administrator'
-        )
-      }
     })
   ],
   preview: {

@@ -84,11 +84,11 @@ async function scrapeEvents(sourceUrl: string) {
       return NextResponse.json({ message: 'No events found', imported: 0 })
     }
 
-    // 2. Check for existing events to avoid duplicates
-    const existingTitles: string[] = await client.fetch(
-      `*[_type == "event"]{ title }.title`
+    // 2. Check for existing events to avoid duplicates (match by ticketUrl / source link)
+    const existingUrls: string[] = await client.fetch(
+      `*[_type == "event" && defined(ticketUrl)]{ ticketUrl }.ticketUrl`
     )
-    const existingSet = new Set(existingTitles.map(t => t?.toLowerCase().trim()))
+    const existingSet = new Set(existingUrls.map(u => u?.toLowerCase().trim()))
 
     // 3. Ensure "Shaftesbury Arts Centre" venue exists
     let venueId = await client.fetch(
@@ -125,7 +125,7 @@ async function scrapeEvents(sourceUrl: string) {
     })
 
     const eventsToProcess = wpEvents.filter(
-      (e) => !existingSet.has(stripHtml(e.title.rendered).toLowerCase().trim())
+      (e) => !existingSet.has(e.link?.toLowerCase().trim())
     )
 
     if (!eventsToProcess.length) {
@@ -182,14 +182,26 @@ ${JSON.stringify(eventSummaries, null, 2)}`,
       )
     }
 
-    const parsedEvents: ParsedEvent[] = JSON.parse(jsonMatch[0])
+    const allParsedEvents: ParsedEvent[] = JSON.parse(jsonMatch[0])
 
-    // 6. Create events in Sanity
+    // 6. Filter to events within 90 days
+    const now = new Date()
+    const cutoff = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000)
+    const today = now.toISOString().split('T')[0]
+
+    const parsedWithIndex = allParsedEvents
+      .map((parsed, i) => ({ parsed, wpIndex: i }))
+      .filter(({ parsed }) => {
+        const eventDate = parsed.date
+        return eventDate >= today && eventDate <= cutoff.toISOString().split('T')[0]
+      })
+
+    // 7. Create events in Sanity
     const results: Array<{ title: string; id: string; status: string }> = []
+    const skippedOutOfRange = allParsedEvents.length - parsedWithIndex.length
 
-    for (let i = 0; i < parsedEvents.length; i++) {
-      const parsed = parsedEvents[i]
-      const wpEvent = eventsToProcess[i]
+    for (const { parsed, wpIndex } of parsedWithIndex) {
+      const wpEvent = eventsToProcess[wpIndex]
 
       try {
         // Upload featured image if available
@@ -251,7 +263,8 @@ ${JSON.stringify(eventSummaries, null, 2)}`,
     return NextResponse.json({
       message: `Imported ${results.filter((r) => r.status === 'created').length} events`,
       imported: results.filter((r) => r.status === 'created').length,
-      skipped: wpEvents.length - eventsToProcess.length,
+      skippedDuplicate: wpEvents.length - eventsToProcess.length,
+      skippedOutOfRange,
       results,
     })
   } catch (error) {
