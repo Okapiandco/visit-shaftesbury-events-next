@@ -11,7 +11,8 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { path: '/', label: "WHAT'S ON" },
+    { path: '/', label: 'HOME' },
+    { path: '/events', label: "WHAT'S ON" },
     { path: '/directory', label: 'DIRECTORY' },
     { path: '/venues', label: 'VENUES' },
     { path: '/travel', label: 'TRAVEL' },

@@ -34,7 +34,7 @@ export default async function HomePage() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* What's On */}
-            <Link href="/#events" className="group">
+            <Link href="/events" className="group">
               <div className="border border-border p-6 h-full transition-all duration-300 hover:border-racing-green hover:shadow-lg">
                 <div className="h-12 w-12 bg-racing-green/10 flex items-center justify-center mb-4">
                   <Calendar className="h-6 w-6 text-racing-green" />
@@ -121,7 +121,7 @@ export default async function HomePage() {
                   </p>
                 </div>
                 <Link
-                  href="/#events"
+                  href="/events"
                   className="text-racing-green font-medium inline-flex items-center gap-1 hover:underline"
                 >
                   View all events <ArrowRight className="h-4 w-4" />

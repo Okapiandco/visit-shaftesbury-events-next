@@ -33,6 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: BASE_URL, lastModified: new Date() },
+    { url: `${BASE_URL}/events`, lastModified: new Date() },
     { url: `${BASE_URL}/directory`, lastModified: new Date() },
     { url: `${BASE_URL}/venues`, lastModified: new Date() },
     { url: `${BASE_URL}/travel`, lastModified: new Date() },
