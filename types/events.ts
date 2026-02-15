@@ -83,6 +83,7 @@ export type BusinessCategory =
   | 'professional'
   | 'trades'
   | 'health'
+  | 'accommodation'
   | 'other';
 
 export const businessCategoryLabels: Record<BusinessCategory, string> = {
@@ -94,6 +95,7 @@ export const businessCategoryLabels: Record<BusinessCategory, string> = {
   professional: 'Professional Services',
   trades: 'Trades & Services',
   health: 'Health & Wellbeing',
+  accommodation: 'Accommodation',
   other: 'Other',
 };
 
@@ -106,5 +108,6 @@ export const businessCategoryColors: Record<BusinessCategory, string> = {
   professional: 'bg-blue-100 text-blue-700',
   trades: 'bg-slate-100 text-slate-700',
   health: 'bg-green-100 text-green-700',
+  accommodation: 'bg-indigo-100 text-indigo-700',
   other: 'bg-muted text-muted-foreground',
 };

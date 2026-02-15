@@ -35,6 +35,7 @@ export default defineType({
           { title: 'Professional Services', value: 'professional' },
           { title: 'Trades & Services', value: 'trades' },
           { title: 'Health & Wellbeing', value: 'health' },
+          { title: 'Accommodation', value: 'accommodation' },
           { title: 'Other', value: 'other' }
         ],
         layout: 'dropdown'
