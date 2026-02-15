@@ -23,14 +23,14 @@ const EventCard = ({ event, featured = false }: EventCardProps) => {
         {/* Image */}
         <div
           className={`relative overflow-hidden bg-muted ${
-            featured ? 'md:w-2/5 h-56 md:h-auto' : 'h-48'
+            featured ? 'md:w-2/5 h-56 md:h-auto' : 'aspect-[4/3]'
           }`}
         >
           {event.imageUrl ? (
             <img
               src={event.imageUrl}
               alt={event.title}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
             <div className="h-full w-full bg-secondary flex items-center justify-center">
