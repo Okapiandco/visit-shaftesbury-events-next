@@ -1,5 +1,5 @@
 export const approvedEventsQuery = `
-  *[_type == "event" && status == "approved"] | order(date asc) {
+  *[_type == "event" && status == "approved" && date >= $today] | order(date asc) {
     _id,
     title,
     description,
@@ -75,7 +75,7 @@ export const venueByIdQuery = `
 `
 
 export const eventsByVenueQuery = `
-  *[_type == "event" && venue._ref == $venueId && status == "approved"] | order(date asc) {
+  *[_type == "event" && venue._ref == $venueId && status == "approved" && date >= $today] | order(date asc) {
     _id,
     title,
     description,

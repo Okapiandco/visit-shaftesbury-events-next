@@ -21,10 +21,14 @@ function revalidate(seconds: number) {
   return isDev ? { next: { revalidate: 0 } } : { next: { revalidate: seconds } }
 }
 
+function getTodayDate(): string {
+  return new Date().toISOString().split('T')[0]
+}
+
 export async function getEvents(): Promise<Event[]> {
   const events = await client.fetch<SanityEvent[]>(
     approvedEventsQuery,
-    {},
+    { today: getTodayDate() },
     revalidate(60)
   )
   return events.map(transformSanityEvent)
@@ -60,7 +64,7 @@ export async function getVenue(id: string): Promise<Venue | null> {
 export async function getEventsByVenue(venueId: string): Promise<Event[]> {
   const events = await client.fetch<SanityEvent[]>(
     eventsByVenueQuery,
-    { venueId },
+    { venueId, today: getTodayDate() },
     revalidate(60)
   )
   return events.map(transformSanityEvent)
