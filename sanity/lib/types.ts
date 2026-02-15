@@ -87,4 +87,9 @@ export interface HomepageSettings {
   allEventsSectionTitle?: string
   welcomeMessage?: SanityBlock[]
   showWelcomeMessage?: boolean
+  aboutTitle?: string
+  aboutText?: SanityBlock[]
+  aboutImage?: SanityImageSource
+  aboutLinkText?: string
+  aboutLinkUrl?: string
 }

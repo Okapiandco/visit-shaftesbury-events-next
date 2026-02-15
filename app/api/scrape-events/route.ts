@@ -160,7 +160,7 @@ async function scrapeEvents(sourceUrl: string) {
 - category: one of: community, music, sports, arts, education, markets, charity, council, other. Use "arts" for films/cinema/theatre, "music" for music events, "education" for talks/workshops, "community" for general community events
 - price: ticket price as string e.g. "£7.50", "Free", "£14-£16". If unknown omit
 - ticketUrl: the event link URL
-- organizer: the organizing group/person. Default to "Shaftesbury Arts Centre" if not clear
+- organizer: the organising group/person. Default to "Shaftesbury Arts Centre" if not clear
 
 Return a JSON array of objects. Only return the JSON array, no other text.
 

@@ -169,6 +169,11 @@ export const homepageSettingsQuery = `
     allEventsSectionTitle,
     welcomeMessage,
     showWelcomeMessage,
-    contentSections
+    contentSections,
+    aboutTitle,
+    aboutText,
+    aboutImage,
+    aboutLinkText,
+    aboutLinkUrl
   }
 `

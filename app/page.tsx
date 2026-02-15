@@ -3,7 +3,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
 import EventCard from '@/components/EventCard'
+import PortableText from '@/components/PortableText'
 import { getEvents, getHomepageSettings } from '@/sanity/lib/fetchers'
+import { getImageUrl } from '@/sanity/lib/image'
 import { Calendar, Store, MapPin, Train, Info, ArrowRight } from 'lucide-react'
 
 export default async function HomePage() {
@@ -148,32 +150,38 @@ export default async function HomePage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-4">
-                About Shaftesbury
+                {settings?.aboutTitle || 'About Shaftesbury'}
               </h2>
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  Perched on a hilltop 215 metres above sea level, Shaftesbury is one of England's
-                  oldest and most picturesque towns. Founded by King Alfred the Great in 880 AD,
-                  the town is famous for Gold Hill — the iconic cobbled street featured in the
-                  beloved Hovis bread advertisement.
-                </p>
-                <p>
-                  With stunning views over the Blackmore Vale, a thriving high street of independent
-                  shops and cafes, and a vibrant calendar of community events, Shaftesbury is a
-                  wonderful place to visit, live and work.
-                </p>
-              </div>
+              {settings?.aboutText ? (
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <PortableText value={settings.aboutText} />
+                </div>
+              ) : (
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    Perched on a hilltop 215 metres above sea level, Shaftesbury is one of England&apos;s
+                    oldest and most picturesque towns. Founded by King Alfred the Great in 880 AD,
+                    the town is famous for Gold Hill — the iconic cobbled street featured in the
+                    beloved Hovis bread advertisement.
+                  </p>
+                  <p>
+                    With stunning views over the Blackmore Vale, a thriving high street of independent
+                    shops and cafes, and a vibrant calendar of community events, Shaftesbury is a
+                    wonderful place to visit, live and work.
+                  </p>
+                </div>
+              )}
               <Link
-                href="/about"
+                href={settings?.aboutLinkUrl || '/about'}
                 className="inline-flex items-center gap-2 text-racing-green font-medium mt-6 hover:underline"
               >
-                Learn more about Shaftesbury <ArrowRight className="h-4 w-4" />
+                {settings?.aboutLinkText || 'Learn more about Shaftesbury'} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
             <div className="relative h-80 md:h-96">
               <img
-                src="https://cdn.sanity.io/images/cpjyb702/production/9808e47bb6f557f2ebf99c13d01807d46c958725-1800x1013.jpg?w=800&q=85&auto=format"
-                alt="View of Shaftesbury"
+                src={getImageUrl(settings?.aboutImage, { width: 800, quality: 85, format: 'webp' }) || 'https://cdn.sanity.io/images/cpjyb702/production/9808e47bb6f557f2ebf99c13d01807d46c958725-1800x1013.jpg?w=800&q=85&auto=format'}
+                alt={settings?.aboutImage?.alt || 'View of Shaftesbury'}
                 className="h-full w-full object-cover"
               />
             </div>

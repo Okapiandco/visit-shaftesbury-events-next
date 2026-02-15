@@ -73,6 +73,48 @@ export default defineType({
       description: 'Toggle welcome message visibility'
     }),
     defineField({
+      name: 'aboutTitle',
+      title: 'About Section Title',
+      type: 'string',
+      description: 'Heading for the About Shaftesbury section',
+      initialValue: 'About Shaftesbury'
+    }),
+    defineField({
+      name: 'aboutText',
+      title: 'About Section Text',
+      type: 'array',
+      of: [{ type: 'block' }],
+      description: 'Text content for the About Shaftesbury section'
+    }),
+    defineField({
+      name: 'aboutImage',
+      title: 'About Section Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Image for the About Shaftesbury section',
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text'
+        }
+      ]
+    }),
+    defineField({
+      name: 'aboutLinkText',
+      title: 'About Section Link Text',
+      type: 'string',
+      description: 'Text for the link below the about section',
+      initialValue: 'Learn more about Shaftesbury'
+    }),
+    defineField({
+      name: 'aboutLinkUrl',
+      title: 'About Section Link URL',
+      type: 'string',
+      description: 'URL for the about section link',
+      initialValue: '/about'
+    }),
+    defineField({
       name: 'contentSections',
       title: 'Homepage Content Sections',
       type: 'array',

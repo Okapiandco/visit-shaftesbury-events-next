@@ -145,7 +145,7 @@ const businesses = [
   },
   {
     business_title: "Farnfields Solicitors",
-    description: "A well-established law firm providing legal services for businesses and individuals, specializing in property, family, and commercial law.",
+    description: "A well-established law firm providing legal services for businesses and individuals, specialising in property, family, and commercial law.",
     website_url: "https://farnfields.com/",
     contact_number: "01747 854244",
     address: "4 Church Lane, Shaftesbury, Dorset SP7 8JT",
@@ -165,7 +165,7 @@ const businesses = [
   },
   {
     business_title: "Willow",
-    description: "Independent shop on Shaftesbury High Street specializing in sustainable and natural boutique clothing and lifestyle items.",
+    description: "Independent shop on Shaftesbury High Street specialising in sustainable and natural boutique clothing and lifestyle items.",
     website_url: "https://willow-natural.co.uk/",
     contact_number: "01747 855101",
     address: "9 High St, Shaftesbury, Dorset SP7 8JS",
