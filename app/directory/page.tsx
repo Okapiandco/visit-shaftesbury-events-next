@@ -2,8 +2,9 @@ import { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DirectorySection from '@/components/DirectorySection'
-import { getBusinesses } from '@/sanity/lib/fetchers'
+import { getBusinesses, getSponsor } from '@/sanity/lib/fetchers'
 import { jsonLdDocument, jsonLdScriptProps, businessListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
+import SponsorBanner from '@/components/SponsorBanner'
 
 export const metadata: Metadata = {
   title: 'Directory',
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 }
 
 export default async function DirectoryPage() {
-  const businesses = await getBusinesses()
+  const [businesses, sponsor] = await Promise.all([
+    getBusinesses(),
+    getSponsor(),
+  ])
 
   const schemas = jsonLdDocument(
     webPageSchema({
@@ -54,6 +58,8 @@ export default async function DirectoryPage() {
         </section>
 
         <DirectorySection businesses={businesses} />
+
+        {sponsor && <SponsorBanner sponsor={sponsor} />}
       </main>
 
       <Footer />

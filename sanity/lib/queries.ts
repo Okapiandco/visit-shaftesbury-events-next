@@ -160,6 +160,16 @@ export const businessByIdQuery = `
   }
 `
 
+export const sponsorBusinessQuery = `
+  *[_type == "business" && name match "Okapi*"][0] {
+    _id,
+    name,
+    description,
+    image,
+    website
+  }
+`
+
 export const homepageSettingsQuery = `
   *[_type == "homepageSettings"][0] {
     heroTitle,

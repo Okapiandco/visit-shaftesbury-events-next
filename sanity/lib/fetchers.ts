@@ -10,9 +10,11 @@ import {
   homepageSettingsQuery,
   approvedBusinessesQuery,
   businessByIdQuery,
+  sponsorBusinessQuery,
 } from './queries'
 import { SanityEvent, SanityVenue, SanityBusiness, SanityPage, HomepageSettings } from './types'
 import { transformSanityEvent, transformSanityVenue, transformSanityBusiness } from '@/lib/transformers'
+import { getImageUrl } from './image'
 import { Event, Venue, Business } from '@/types/events'
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -110,4 +112,26 @@ export async function getHomepageSettings(): Promise<HomepageSettings | null> {
     {},
     revalidate(60)
   )
+}
+
+export interface SponsorData {
+  name: string
+  imageUrl?: string
+  website?: string
+  directoryUrl?: string
+}
+
+export async function getSponsor(): Promise<SponsorData | null> {
+  const business = await client.fetch<SanityBusiness | null>(
+    sponsorBusinessQuery,
+    {},
+    revalidate(300)
+  )
+  if (!business) return null
+  return {
+    name: business.name,
+    imageUrl: getImageUrl(business.image, { width: 400, quality: 90, format: 'webp' }),
+    website: business.website,
+    directoryUrl: `/directory/${business._id}`,
+  }
 }

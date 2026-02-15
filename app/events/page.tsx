@@ -2,8 +2,9 @@ import { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import EventsSection from '@/components/EventsSection'
-import { getEvents } from '@/sanity/lib/fetchers'
+import { getEvents, getSponsor } from '@/sanity/lib/fetchers'
 import { jsonLdDocument, jsonLdScriptProps, eventListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
+import SponsorBanner from '@/components/SponsorBanner'
 
 export const metadata: Metadata = {
   title: "What's On",
@@ -17,7 +18,10 @@ export const metadata: Metadata = {
 }
 
 export default async function EventsPage() {
-  const events = await getEvents()
+  const [events, sponsor] = await Promise.all([
+    getEvents(),
+    getSponsor(),
+  ])
 
   const schemas = jsonLdDocument(
     webPageSchema({
@@ -54,6 +58,8 @@ export default async function EventsPage() {
       </section>
 
       <EventsSection events={events} />
+
+      {sponsor && <SponsorBanner sponsor={sponsor} />}
 
       <Footer />
     </div>

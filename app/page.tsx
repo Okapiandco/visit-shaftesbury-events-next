@@ -4,15 +4,17 @@ import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
 import EventCard from '@/components/EventCard'
 import PortableText from '@/components/PortableText'
-import { getEvents, getHomepageSettings } from '@/sanity/lib/fetchers'
+import { getEvents, getHomepageSettings, getSponsor } from '@/sanity/lib/fetchers'
 import { getImageUrl } from '@/sanity/lib/image'
 import { Calendar, Store, MapPin, Train, Info, ArrowRight } from 'lucide-react'
 import { jsonLdDocument, jsonLdScriptProps, touristDestinationSchema, eventListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
+import SponsorBanner from '@/components/SponsorBanner'
 
 export default async function HomePage() {
-  const [events, settings] = await Promise.all([
+  const [events, settings, sponsor] = await Promise.all([
     getEvents(),
     getHomepageSettings(),
+    getSponsor(),
   ])
 
   const featuredEvents = events.filter(e => e.isFeatured)
@@ -203,6 +205,7 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+        {sponsor && <SponsorBanner sponsor={sponsor} />}
       </main>
       <Footer />
     </div>
