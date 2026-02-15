@@ -59,7 +59,7 @@ const components: PortableTextComponents = {
         <figure className="my-8">
           <img
             src={imageUrl}
-            alt={value.alt || ''}
+            alt={value.alt || 'Image from Visit Shaftesbury'}
             className="w-full h-auto rounded-lg shadow-md"
           />
           {value.caption && (

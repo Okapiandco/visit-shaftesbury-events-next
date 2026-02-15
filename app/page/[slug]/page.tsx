@@ -14,9 +14,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const page = await getPage(slug)
   if (!page) return { title: 'Page Not Found' }
+  const title = page.seo?.metaTitle || page.title
+  const description = page.seo?.metaDescription || `${page.title} — Visit Shaftesbury`
+
   return {
-    title: page.seo?.metaTitle || page.title,
-    description: page.seo?.metaDescription,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `/page/${slug}`,
+    },
+    alternates: { canonical: `/page/${slug}` },
   }
 }
 

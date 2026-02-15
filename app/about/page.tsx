@@ -5,7 +5,13 @@ import { MapPin, Users, History, TreePine } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'About Shaftesbury',
-  description: 'A historic hilltop town in the heart of Dorset',
+  description: 'Learn about Shaftesbury, one of England\'s oldest hilltop towns. Founded by King Alfred in 880 AD, famous for Gold Hill and the Hovis advert.',
+  openGraph: {
+    title: 'About Shaftesbury',
+    description: 'Learn about Shaftesbury, one of England\'s oldest hilltop towns. Founded by King Alfred in 880 AD, famous for Gold Hill.',
+    url: '/about',
+  },
+  alternates: { canonical: '/about' },
 }
 
 export default function AboutPage() {

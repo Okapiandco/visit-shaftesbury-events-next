@@ -5,7 +5,13 @@ import { Train, Bus, Car, ParkingCircle, Zap, Footprints } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Travel & Transport',
-  description: 'How to get to Shaftesbury, Dorset — by train, bus, car, parking, EV charging and more',
+  description: 'How to get to Shaftesbury, Dorset — by train, bus, car, parking, EV charging and more.',
+  openGraph: {
+    title: 'Travel & Transport to Shaftesbury',
+    description: 'How to get to Shaftesbury, Dorset — by train, bus, car, parking, EV charging and more.',
+    url: '/travel',
+  },
+  alternates: { canonical: '/travel' },
 }
 
 export default function TravelPage() {

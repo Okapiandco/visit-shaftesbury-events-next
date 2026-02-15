@@ -7,6 +7,12 @@ import { getEvents } from '@/sanity/lib/fetchers'
 export const metadata: Metadata = {
   title: "What's On",
   description: 'Discover events, festivals, markets and community gatherings happening in Shaftesbury, Dorset.',
+  openGraph: {
+    title: "What's On in Shaftesbury",
+    description: 'Discover events, festivals, markets and community gatherings happening in Shaftesbury, Dorset.',
+    url: '/events',
+  },
+  alternates: { canonical: '/events' },
 }
 
 export default async function EventsPage() {

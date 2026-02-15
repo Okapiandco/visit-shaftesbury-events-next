@@ -6,7 +6,13 @@ import { getVenues } from '@/sanity/lib/fetchers'
 
 export const metadata: Metadata = {
   title: 'Venues',
-  description: 'Explore venues in Shaftesbury and the surrounding area',
+  description: 'Explore venues in Shaftesbury — halls, churches, pubs and spaces available for community events.',
+  openGraph: {
+    title: 'Venues in Shaftesbury',
+    description: 'Explore venues in Shaftesbury — halls, churches, pubs and spaces available for community events.',
+    url: '/venues',
+  },
+  alternates: { canonical: '/venues' },
 }
 
 export default async function VenuesPage() {

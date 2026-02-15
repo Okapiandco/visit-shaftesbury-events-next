@@ -25,9 +25,18 @@ export async function generateMetadata(
     return { title: 'Business Not Found' }
   }
 
+  const description = business.description?.slice(0, 160) || `${business.name} in Shaftesbury, Dorset`
+
   return {
     title: business.name,
-    description: business.description || `${business.name} in Shaftesbury, Dorset`,
+    description,
+    openGraph: {
+      title: business.name,
+      description,
+      url: `/directory/${id}`,
+      ...(business.imageUrl && { images: [{ url: business.imageUrl, width: 800, height: 600, alt: business.name }] }),
+    },
+    alternates: { canonical: `/directory/${id}` },
   }
 }
 
@@ -41,11 +50,36 @@ export default async function BusinessDetailPage(
     notFound()
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: business.name,
+    ...(business.description && { description: business.description }),
+    ...(business.address && {
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: business.address,
+        addressLocality: 'Shaftesbury',
+        addressRegion: 'Dorset',
+        addressCountry: 'GB',
+      },
+    }),
+    ...(business.phone && { telephone: business.phone }),
+    ...(business.email && { email: business.email }),
+    ...(business.website && { url: business.website }),
+    ...(business.imageUrl && { image: business.imageUrl }),
+    ...(business.openingHours && { openingHours: business.openingHours }),
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         {/* Hero Image */}
         <div className="relative h-64 md:h-80 bg-muted">
           {business.imageUrl ? (

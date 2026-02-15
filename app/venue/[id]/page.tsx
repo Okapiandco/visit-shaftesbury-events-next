@@ -17,9 +17,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params
   const venue = await getVenue(id)
   if (!venue) return { title: 'Venue Not Found' }
+
+  const description = venue.description || `Events and activities at ${venue.name}, Shaftesbury, Dorset`
+
   return {
     title: venue.name,
-    description: venue.description || `Events at ${venue.name}`,
+    description,
+    openGraph: {
+      title: venue.name,
+      description,
+      url: `/venue/${id}`,
+      ...(venue.imageUrl && { images: [{ url: venue.imageUrl, width: 800, height: 600, alt: venue.name }] }),
+    },
+    alternates: { canonical: `/venue/${id}` },
   }
 }
 

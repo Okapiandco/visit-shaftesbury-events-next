@@ -6,7 +6,13 @@ import { getBusinesses } from '@/sanity/lib/fetchers'
 
 export const metadata: Metadata = {
   title: 'Directory',
-  description: 'Discover local shops, restaurants, services and businesses in Shaftesbury, Dorset',
+  description: 'Discover local shops, restaurants, cafes, pubs and professional services in Shaftesbury, Dorset.',
+  openGraph: {
+    title: 'Shops & Services in Shaftesbury',
+    description: 'Discover local shops, restaurants, cafes, pubs and professional services in Shaftesbury, Dorset.',
+    url: '/directory',
+  },
+  alternates: { canonical: '/directory' },
 }
 
 export default async function DirectoryPage() {

@@ -6,7 +6,13 @@ import { getVenues } from '@/sanity/lib/fetchers'
 
 export const metadata: Metadata = {
   title: 'Submit an Event',
-  description: 'Submit your event to Visit Shaftesbury',
+  description: 'Submit your event to be listed on Visit Shaftesbury. Community events, markets, festivals and more.',
+  openGraph: {
+    title: 'Submit an Event',
+    description: 'Submit your event to be listed on Visit Shaftesbury.',
+    url: '/submit',
+  },
+  alternates: { canonical: '/submit' },
 }
 
 export default async function SubmitPage() {
