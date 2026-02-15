@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import VenueCard from '@/components/VenueCard'
 import { getVenues } from '@/sanity/lib/fetchers'
+import { jsonLdDocument, jsonLdScriptProps, venueListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Venues',
@@ -18,11 +19,26 @@ export const metadata: Metadata = {
 export default async function VenuesPage() {
   const venues = await getVenues()
 
+  const schemas = jsonLdDocument(
+    webPageSchema({
+      name: 'Venues in Shaftesbury',
+      description: 'Explore venues in Shaftesbury — halls, churches, pubs and spaces available for community events.',
+      url: '/venues',
+      type: 'CollectionPage',
+    }),
+    venueListSchema(venues),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Venues', url: '/venues' },
+    ]),
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main id="main-content" className="flex-1">
+        <script {...jsonLdScriptProps(schemas)} />
         {/* Hero */}
         <section className="bg-navy py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">

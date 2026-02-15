@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { MapPin, Users, History, TreePine } from 'lucide-react'
+import { jsonLdDocument, jsonLdScriptProps, touristDestinationSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'About Shaftesbury',
@@ -14,12 +15,27 @@ export const metadata: Metadata = {
   alternates: { canonical: '/about' },
 }
 
+const aboutSchemas = jsonLdDocument(
+  webPageSchema({
+    name: 'About Shaftesbury',
+    description: "Learn about Shaftesbury, one of England's oldest hilltop towns. Founded by King Alfred in 880 AD, famous for Gold Hill.",
+    url: '/about',
+    type: 'AboutPage',
+  }),
+  touristDestinationSchema(),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'About Shaftesbury', url: '/about' },
+  ]),
+)
+
 export default function AboutPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
+        <script {...jsonLdScriptProps(aboutSchemas)} />
         {/* Hero */}
         <section className="bg-racing-green py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">

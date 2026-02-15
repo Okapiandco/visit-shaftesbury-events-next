@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import DirectorySection from '@/components/DirectorySection'
 import { getBusinesses } from '@/sanity/lib/fetchers'
+import { jsonLdDocument, jsonLdScriptProps, businessListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Directory',
@@ -18,11 +19,26 @@ export const metadata: Metadata = {
 export default async function DirectoryPage() {
   const businesses = await getBusinesses()
 
+  const schemas = jsonLdDocument(
+    webPageSchema({
+      name: 'Shops & Services in Shaftesbury',
+      description: 'Discover local shops, restaurants, cafes, pubs and professional services in Shaftesbury, Dorset.',
+      url: '/directory',
+      type: 'CollectionPage',
+    }),
+    businessListSchema(businesses),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Shops & Services', url: '/directory' },
+    ]),
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main id="main-content" className="flex-1">
+        <script {...jsonLdScriptProps(schemas)} />
         {/* Hero */}
         <section className="bg-navy py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">

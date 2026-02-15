@@ -5,6 +5,7 @@ import Footer from '@/components/Footer'
 import PortableText from '@/components/PortableText'
 import { getPage, getPages } from '@/sanity/lib/fetchers'
 import { getImageUrl } from '@/sanity/lib/image'
+import { jsonLdDocument, jsonLdScriptProps, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -43,10 +44,23 @@ export default async function DynamicPage({ params }: Props) {
     ? getImageUrl(page.heroImage, { width: 1920, quality: 85, format: 'webp' })
     : undefined
 
+  const schemas = jsonLdDocument(
+    webPageSchema({
+      name: page.seo?.metaTitle || page.title,
+      description: page.seo?.metaDescription || `${page.title} — Visit Shaftesbury`,
+      url: `/page/${slug}`,
+    }),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: page.title, url: `/page/${slug}` },
+    ]),
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main className="flex-1">
+        <script {...jsonLdScriptProps(schemas)} />
         {heroImageUrl ? (
           <section
             className="relative bg-foreground py-24 md:py-32 bg-cover bg-center"

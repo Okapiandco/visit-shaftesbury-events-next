@@ -3,6 +3,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import EventsSection from '@/components/EventsSection'
 import { getEvents } from '@/sanity/lib/fetchers'
+import { jsonLdDocument, jsonLdScriptProps, eventListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: "What's On",
@@ -18,9 +19,24 @@ export const metadata: Metadata = {
 export default async function EventsPage() {
   const events = await getEvents()
 
+  const schemas = jsonLdDocument(
+    webPageSchema({
+      name: "What's On in Shaftesbury",
+      description: 'Discover events, festivals, markets and community gatherings happening in Shaftesbury, Dorset.',
+      url: '/events',
+      type: 'CollectionPage',
+    }),
+    eventListSchema(events),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: "What's On", url: '/events' },
+    ]),
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
+      <script {...jsonLdScriptProps(schemas)} />
 
       {/* Hero */}
       <section id="main-content" className="bg-navy py-16 md:py-20">

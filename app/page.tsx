@@ -7,6 +7,7 @@ import PortableText from '@/components/PortableText'
 import { getEvents, getHomepageSettings } from '@/sanity/lib/fetchers'
 import { getImageUrl } from '@/sanity/lib/image'
 import { Calendar, Store, MapPin, Train, Info, ArrowRight } from 'lucide-react'
+import { jsonLdDocument, jsonLdScriptProps, touristDestinationSchema, eventListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export default async function HomePage() {
   const [events, settings] = await Promise.all([
@@ -16,11 +17,26 @@ export default async function HomePage() {
 
   const featuredEvents = events.filter(e => e.isFeatured)
   const upcomingEvents = events.slice(0, 6)
+  const displayedEvents = featuredEvents.length > 0 ? featuredEvents.slice(0, 3) : upcomingEvents.slice(0, 3)
+
+  const schemas = jsonLdDocument(
+    webPageSchema({
+      name: 'Visit Shaftesbury',
+      description: 'Discover events, shops, services and things to do in Shaftesbury, Dorset. Your guide to this historic hilltop town.',
+      url: '/',
+    }),
+    touristDestinationSchema(),
+    ...(displayedEvents.length > 0 ? [eventListSchema(displayedEvents)] : []),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+    ]),
+  )
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       <main id="main-content" className="flex-1">
+        <script {...jsonLdScriptProps(schemas)} />
         <HeroSection settings={settings} />
 
         {/* Explore Sections */}

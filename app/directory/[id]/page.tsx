@@ -7,6 +7,7 @@ import { getBusiness, getBusinesses } from '@/sanity/lib/fetchers'
 import { businessCategoryLabels, businessCategoryColors, BusinessCategory } from '@/types/events'
 import { MapPin, Phone, Mail, Globe, Clock, ArrowLeft, Store } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { jsonLdDocument, jsonLdScriptProps, businessSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export async function generateStaticParams() {
   const businesses = await getBusinesses()
@@ -50,36 +51,26 @@ export default async function BusinessDetailPage(
     notFound()
   }
 
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: business.name,
-    ...(business.description && { description: business.description }),
-    ...(business.address && {
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: business.address,
-        addressLocality: 'Shaftesbury',
-        addressRegion: 'Dorset',
-        addressCountry: 'GB',
-      },
+  const schemas = jsonLdDocument(
+    businessSchema(business),
+    webPageSchema({
+      name: business.name,
+      description: business.description?.slice(0, 160) || `${business.name} in Shaftesbury, Dorset`,
+      url: `/directory/${id}`,
     }),
-    ...(business.phone && { telephone: business.phone }),
-    ...(business.email && { email: business.email }),
-    ...(business.website && { url: business.website }),
-    ...(business.imageUrl && { image: business.imageUrl }),
-    ...(business.openingHours && { openingHours: business.openingHours }),
-  }
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Shops & Services', url: '/directory' },
+      { name: business.name, url: `/directory/${id}` },
+    ]),
+  )
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script {...jsonLdScriptProps(schemas)} />
         {/* Hero Image */}
         <div className="relative h-64 md:h-80 bg-muted">
           {business.imageUrl ? (

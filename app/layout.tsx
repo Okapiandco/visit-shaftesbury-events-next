@@ -3,6 +3,7 @@ import { Inter, Cormorant_Garamond } from 'next/font/google'
 import Script from 'next/script'
 import { Toaster } from 'sonner'
 import AccessibilityToolbar from '@/components/AccessibilityToolbar'
+import { jsonLdDocument, jsonLdScriptProps, organizationSchema, webSiteSchema } from '@/lib/schema'
 import './globals.css'
 
 const inter = Inter({
@@ -32,11 +33,20 @@ export const metadata: Metadata = {
     title: 'Visit Shaftesbury',
     description: 'Discover events, shops, services and things to do in Shaftesbury, Dorset. Your guide to this historic hilltop town.',
     url: SITE_URL,
+    images: [
+      {
+        url: '/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Visit Shaftesbury',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Visit Shaftesbury',
     description: 'Discover events, shops, services and things to do in Shaftesbury, Dorset.',
+    images: ['/logo.png'],
   },
   robots: {
     index: true,
@@ -47,10 +57,16 @@ export const metadata: Metadata = {
   },
 }
 
+const siteSchemas = jsonLdDocument(
+  organizationSchema(),
+  webSiteSchema(),
+)
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script {...jsonLdScriptProps(siteSchemas)} />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-019RKK15W2"
           strategy="afterInteractive"

@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Train, Bus, Car, ParkingCircle, Zap, Footprints } from 'lucide-react'
+import { jsonLdDocument, jsonLdScriptProps, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Travel & Transport',
@@ -14,12 +15,25 @@ export const metadata: Metadata = {
   alternates: { canonical: '/travel' },
 }
 
+const travelSchemas = jsonLdDocument(
+  webPageSchema({
+    name: 'Travel & Transport to Shaftesbury',
+    description: 'How to get to Shaftesbury, Dorset — by train, bus, car, parking, EV charging and more.',
+    url: '/travel',
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Travel & Transport', url: '/travel' },
+  ]),
+)
+
 export default function TravelPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
+        <script {...jsonLdScriptProps(travelSchemas)} />
         {/* Hero */}
         <section className="bg-racing-green py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">

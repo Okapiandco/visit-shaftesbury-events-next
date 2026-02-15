@@ -8,6 +8,7 @@ import { getVenue, getEventsByVenue, getVenues } from '@/sanity/lib/fetchers'
 import { getImageUrl } from '@/sanity/lib/image'
 import { MapPin, Users, ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { jsonLdDocument, jsonLdScriptProps, venueSchema, eventListSchema, webPageSchema, breadcrumbSchema } from '@/lib/schema'
 
 type Props = {
   params: Promise<{ id: string }>
@@ -46,11 +47,27 @@ export default async function VenueDetailPage({ params }: Props) {
   ])
   if (!venue) notFound()
 
+  const schemas = jsonLdDocument(
+    venueSchema(venue),
+    webPageSchema({
+      name: venue.name,
+      description: venue.description || `Events and activities at ${venue.name}, Shaftesbury, Dorset`,
+      url: `/venue/${id}`,
+    }),
+    ...(venueEvents && venueEvents.length > 0 ? [eventListSchema(venueEvents)] : []),
+    breadcrumbSchema([
+      { name: 'Home', url: '/' },
+      { name: 'Venues', url: '/venues' },
+      { name: venue.name, url: `/venue/${id}` },
+    ]),
+  )
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
       <main className="flex-1">
+        <script {...jsonLdScriptProps(schemas)} />
         {/* Hero Image */}
         <div className="relative h-72 md:h-96 overflow-hidden">
           {venue.imageUrl ? (
