@@ -23,7 +23,7 @@ export default async function EventsPage() {
       <Header />
 
       {/* Hero */}
-      <section className="bg-navy py-16 md:py-20">
+      <section id="main-content" className="bg-navy py-16 md:py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="w-16 h-1 bg-gold mx-auto mb-6" />
           <h1 className="font-display text-4xl md:text-5xl font-semibold text-white mb-4">

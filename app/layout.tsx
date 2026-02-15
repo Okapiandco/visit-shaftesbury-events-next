@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Cormorant_Garamond } from 'next/font/google'
 import Script from 'next/script'
 import { Toaster } from 'sonner'
+import AccessibilityToolbar from '@/components/AccessibilityToolbar'
 import './globals.css'
 
 const inter = Inter({
@@ -64,7 +65,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className={`${inter.variable} ${cormorant.variable} font-sans antialiased`}>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         {children}
+        <AccessibilityToolbar />
         <Toaster position="top-right" />
       </body>
     </html>

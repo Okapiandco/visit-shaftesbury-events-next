@@ -209,6 +209,8 @@ const SubmitBusinessForm = () => {
                     value={formData.name}
                     onChange={(e) => handleChange('name', e.target.value)}
                     maxLength={100}
+                    required
+                    aria-required="true"
                     className="pl-10 rounded-none"
                   />
                 </div>

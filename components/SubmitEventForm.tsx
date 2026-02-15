@@ -214,6 +214,8 @@ const SubmitEventForm = ({ venues }: SubmitEventFormProps) => {
                   value={formData.title}
                   onChange={(e) => handleChange('title', e.target.value)}
                   maxLength={100}
+                  required
+                  aria-required="true"
                   className="rounded-none"
                 />
               </div>
@@ -228,6 +230,8 @@ const SubmitEventForm = ({ venues }: SubmitEventFormProps) => {
                   value={formData.description}
                   onChange={(e) => handleChange('description', e.target.value)}
                   maxLength={1000}
+                  required
+                  aria-required="true"
                   className="rounded-none"
                 />
               </div>
@@ -244,6 +248,8 @@ const SubmitEventForm = ({ venues }: SubmitEventFormProps) => {
                       className="pl-10 rounded-none"
                       value={formData.date}
                       onChange={(e) => handleChange('date', e.target.value)}
+                      required
+                      aria-required="true"
                     />
                   </div>
                 </div>
@@ -257,6 +263,8 @@ const SubmitEventForm = ({ venues }: SubmitEventFormProps) => {
                       className="pl-10 rounded-none"
                       value={formData.time}
                       onChange={(e) => handleChange('time', e.target.value)}
+                      required
+                      aria-required="true"
                     />
                   </div>
                 </div>

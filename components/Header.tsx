@@ -43,7 +43,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-8">
             {navLinks.map(({ path, label }) => (
               <Link
                 key={path}
@@ -75,15 +75,18 @@ const Header = () => {
             size="icon"
             className="lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </Button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-border py-6 animate-fade-in">
-            <nav className="flex flex-col gap-4">
+          <div id="mobile-menu" className="lg:hidden border-t border-border py-6 animate-fade-in">
+            <nav aria-label="Mobile navigation" className="flex flex-col gap-4">
               {navLinks.map(({ path, label }) => (
                 <Link
                   key={path}

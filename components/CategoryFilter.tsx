@@ -24,7 +24,7 @@ const CategoryFilter = ({ selectedCategory, onCategoryChange }: CategoryFilterPr
   ];
 
   return (
-    <ScrollArea className="w-full whitespace-nowrap">
+    <ScrollArea className="w-full whitespace-nowrap" role="group" aria-label="Filter events by category">
       <div className="flex gap-2 pb-3">
         {categories.map((category) => (
           <Button
@@ -32,6 +32,7 @@ const CategoryFilter = ({ selectedCategory, onCategoryChange }: CategoryFilterPr
             variant={selectedCategory === category ? 'default' : 'outline'}
             size="sm"
             onClick={() => onCategoryChange(category)}
+            aria-pressed={selectedCategory === category}
             className="shrink-0 uppercase text-xs tracking-wide"
           >
             {category === 'all' ? 'All' : categoryLabels[category]}

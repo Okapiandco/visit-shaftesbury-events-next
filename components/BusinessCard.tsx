@@ -8,7 +8,7 @@ interface BusinessCardProps {
 
 const BusinessCard = ({ business }: BusinessCardProps) => {
   return (
-    <Link href={`/directory/${business.id}`}>
+    <Link href={`/directory/${business.id}`} aria-label={`${business.name}${business.category ? ` — ${business.category}` : ''}`}>
       <article className="group overflow-hidden transition-all duration-300 bg-card border border-border hover:border-foreground/20">
         {/* Image */}
         <div className="relative h-52 overflow-hidden bg-muted">
@@ -39,14 +39,14 @@ const BusinessCard = ({ business }: BusinessCardProps) => {
 
             {business.address && (
               <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                <MapPin className="h-4 w-4 flex-shrink-0" />
+                <MapPin className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 <span>{business.address}</span>
               </div>
             )}
 
             {business.phone && (
               <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                <Phone className="h-4 w-4 flex-shrink-0" />
+                <Phone className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
                 <span>{business.phone}</span>
               </div>
             )}

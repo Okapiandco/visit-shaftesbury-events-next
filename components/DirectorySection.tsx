@@ -54,9 +54,10 @@ const DirectorySection = ({ businesses }: DirectorySectionProps) => {
       </div>
 
       {/* Category Filter */}
-      <div className="mb-10 flex flex-wrap gap-2">
+      <div className="mb-10 flex flex-wrap gap-2" role="group" aria-label="Filter businesses by category">
         <button
           onClick={() => setSelectedCategory('all')}
+          aria-pressed={selectedCategory === 'all'}
           className={`px-4 py-2 text-sm font-medium border transition-colors ${
             selectedCategory === 'all'
               ? 'bg-navy text-white border-navy'
@@ -69,6 +70,7 @@ const DirectorySection = ({ businesses }: DirectorySectionProps) => {
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
+            aria-pressed={selectedCategory === cat}
             className={`px-4 py-2 text-sm font-medium border transition-colors ${
               selectedCategory === cat
                 ? 'bg-navy text-white border-navy'

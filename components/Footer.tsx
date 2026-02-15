@@ -29,7 +29,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <nav aria-label="Footer navigation">
             <h4 className="font-display font-semibold text-lg mb-4 text-gold">Quick Links</h4>
             <ul className="space-y-3">
               <li>
@@ -63,7 +63,7 @@ const Footer = () => {
                 </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
           {/* Contact */}
           <div>

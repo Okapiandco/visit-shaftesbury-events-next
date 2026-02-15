@@ -14,7 +14,7 @@ const EventCard = ({ event, featured = false }: EventCardProps) => {
   const formattedTime = event.time;
 
   return (
-    <Link href={`/event/${event.id}`}>
+    <Link href={`/event/${event.id}`} aria-label={`${event.title} — ${formattedDate} at ${event.venue.name}`}>
       <article
         className={`group overflow-hidden transition-all duration-300 bg-card border border-border hover:border-foreground/20 ${
           featured ? 'md:flex' : ''
@@ -61,11 +61,11 @@ const EventCard = ({ event, featured = false }: EventCardProps) => {
             {/* Date & Time */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <div className="flex items-center gap-1.5">
-                <Calendar className="h-4 w-4" />
+                <Calendar className="h-4 w-4" aria-hidden="true" />
                 <span className="font-medium">{formattedDate}</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4" />
+                <Clock className="h-4 w-4" aria-hidden="true" />
                 <span>{formattedTime}{event.endTime && ` \u2013 ${event.endTime}`}</span>
               </div>
             </div>
@@ -84,7 +84,7 @@ const EventCard = ({ event, featured = false }: EventCardProps) => {
 
             {/* Venue */}
             <div className="flex items-center gap-1.5 text-sm text-muted-foreground pt-2">
-              <MapPin className="h-4 w-4" />
+              <MapPin className="h-4 w-4" aria-hidden="true" />
               <span>{event.venue.name}</span>
             </div>
 

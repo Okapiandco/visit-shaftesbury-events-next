@@ -8,7 +8,7 @@ interface VenueCardProps {
 
 const VenueCard = ({ venue }: VenueCardProps) => {
   return (
-    <Link href={`/venue/${venue.id}`}>
+    <Link href={`/venue/${venue.id}`} aria-label={`${venue.name} — ${venue.address}`}>
       <article className="group overflow-hidden transition-all duration-300 bg-card border border-border hover:border-foreground/20">
         {/* Image */}
         <div className="relative h-52 overflow-hidden bg-muted">
@@ -33,13 +33,13 @@ const VenueCard = ({ venue }: VenueCardProps) => {
             </h3>
 
             <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4" />
+              <MapPin className="h-4 w-4" aria-hidden="true" />
               <span>{venue.address}</span>
             </div>
 
             {venue.capacity && (
               <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                <Users className="h-4 w-4" />
+                <Users className="h-4 w-4" aria-hidden="true" />
                 <span>Capacity: {venue.capacity.toLocaleString()}</span>
               </div>
             )}
