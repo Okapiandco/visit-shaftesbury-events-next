@@ -181,7 +181,7 @@ export default async function HomePage() {
             <div className="relative h-80 md:h-96">
               <img
                 src={getImageUrl(settings?.aboutImage, { width: 800, quality: 85, format: 'webp' }) || 'https://cdn.sanity.io/images/cpjyb702/production/9808e47bb6f557f2ebf99c13d01807d46c958725-1800x1013.jpg?w=800&q=85&auto=format'}
-                alt={settings?.aboutImage?.alt || 'View of Shaftesbury'}
+                alt={(settings?.aboutImage as { alt?: string })?.alt || 'View of Shaftesbury'}
                 className="h-full w-full object-cover"
               />
             </div>
