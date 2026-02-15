@@ -4,37 +4,44 @@
 
 @layer base {
   :root {
-    /* Visit Shaftesbury - Clean black/white heritage palette */
+    /* Visit Shaftesbury - Navy, Gold & Green heritage palette */
     --background: 0 0% 100%;
-    --foreground: 0 0% 8%;
+    --foreground: 213 53% 18%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card-foreground: 213 53% 18%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover-foreground: 213 53% 18%;
 
-    --primary: 0 0% 8%;
+    --primary: 213 53% 23%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 43 30% 95%;
+    --secondary-foreground: 213 53% 18%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 43 15% 96%;
+    --muted-foreground: 213 20% 45%;
 
-    --accent: 142 50% 35%;
+    --accent: 152 100% 13%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 8%;
+    --border: 213 15% 88%;
+    --input: 213 15% 88%;
+    --ring: 213 53% 23%;
 
     --racing-green: 152 100% 13%;
     --racing-green-light: 152 60% 20%;
+
+    --navy: 213 53% 23%;
+    --navy-light: 213 40% 32%;
+    --navy-dark: 213 60% 16%;
+    --gold: 42 48% 56%;
+    --gold-light: 42 55% 72%;
+    --gold-dark: 42 50% 42%;
 
     --radius: 0.5rem;
 

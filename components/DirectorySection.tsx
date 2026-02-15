@@ -11,7 +11,7 @@ interface DirectorySectionProps {
 }
 
 const categories: BusinessCategory[] = [
-  'shop', 'restaurant', 'cafe', 'pub', 'salon', 'professional', 'trades', 'health', 'other'
+  'shop', 'restaurant', 'cafe', 'pub', 'accommodation', 'salon', 'professional', 'trades', 'health', 'other'
 ];
 
 const DirectorySection = ({ businesses }: DirectorySectionProps) => {
@@ -36,7 +36,7 @@ const DirectorySection = ({ businesses }: DirectorySectionProps) => {
             Browse Directory
           </h2>
           <p className="text-muted-foreground mt-2">
-            Discover local shops and services in Shaftesbury
+            Find independent shops, professional services, pubs & caf&eacute;s in Shaftesbury, Dorset — from boutique fashion to legal services and local hospitality.
           </p>
         </div>
 
@@ -59,8 +59,8 @@ const DirectorySection = ({ businesses }: DirectorySectionProps) => {
           onClick={() => setSelectedCategory('all')}
           className={`px-4 py-2 text-sm font-medium border transition-colors ${
             selectedCategory === 'all'
-              ? 'bg-foreground text-background border-foreground'
-              : 'bg-background text-muted-foreground border-border hover:border-foreground/50'
+              ? 'bg-navy text-white border-navy'
+              : 'bg-background text-muted-foreground border-border hover:border-navy/50'
           }`}
         >
           All
@@ -71,8 +71,8 @@ const DirectorySection = ({ businesses }: DirectorySectionProps) => {
             onClick={() => setSelectedCategory(cat)}
             className={`px-4 py-2 text-sm font-medium border transition-colors ${
               selectedCategory === cat
-                ? 'bg-foreground text-background border-foreground'
-                : 'bg-background text-muted-foreground border-border hover:border-foreground/50'
+                ? 'bg-navy text-white border-navy'
+                : 'bg-background text-muted-foreground border-border hover:border-navy/50'
             }`}
           >
             {businessCategoryLabels[cat]}

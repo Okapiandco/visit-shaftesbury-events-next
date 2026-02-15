@@ -37,17 +37,17 @@ export default async function HomePage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* What's On */}
             <Link href="/events" className="group">
-              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-racing-green hover:shadow-lg">
-                <div className="h-12 w-12 bg-racing-green/10 flex items-center justify-center mb-4">
-                  <Calendar className="h-6 w-6 text-racing-green" />
+              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-navy hover:shadow-lg">
+                <div className="h-12 w-12 bg-navy/10 flex items-center justify-center mb-4">
+                  <Calendar className="h-6 w-6 text-gold-dark" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-racing-green transition-colors">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-navy transition-colors">
                   What's On
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Events, festivals, markets and community gatherings happening in Shaftesbury.
                 </p>
-                <span className="text-racing-green text-sm font-medium inline-flex items-center gap-1">
+                <span className="text-navy text-sm font-medium inline-flex items-center gap-1">
                   View Events <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
@@ -55,17 +55,17 @@ export default async function HomePage() {
 
             {/* Directory */}
             <Link href="/directory" className="group">
-              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-racing-green hover:shadow-lg">
-                <div className="h-12 w-12 bg-racing-green/10 flex items-center justify-center mb-4">
-                  <Store className="h-6 w-6 text-racing-green" />
+              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-navy hover:shadow-lg">
+                <div className="h-12 w-12 bg-navy/10 flex items-center justify-center mb-4">
+                  <Store className="h-6 w-6 text-gold-dark" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-racing-green transition-colors">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-navy transition-colors">
                   Shops & Services
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Browse local shops, restaurants, cafes, pubs and professional services.
                 </p>
-                <span className="text-racing-green text-sm font-medium inline-flex items-center gap-1">
+                <span className="text-navy text-sm font-medium inline-flex items-center gap-1">
                   Browse Directory <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
@@ -73,17 +73,17 @@ export default async function HomePage() {
 
             {/* Venues */}
             <Link href="/venues" className="group">
-              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-racing-green hover:shadow-lg">
-                <div className="h-12 w-12 bg-racing-green/10 flex items-center justify-center mb-4">
-                  <MapPin className="h-6 w-6 text-racing-green" />
+              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-navy hover:shadow-lg">
+                <div className="h-12 w-12 bg-navy/10 flex items-center justify-center mb-4">
+                  <MapPin className="h-6 w-6 text-gold-dark" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-racing-green transition-colors">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-navy transition-colors">
                   Venues
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   Discover halls, churches, pubs and spaces available for community events.
                 </p>
-                <span className="text-racing-green text-sm font-medium inline-flex items-center gap-1">
+                <span className="text-navy text-sm font-medium inline-flex items-center gap-1">
                   View Venues <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
@@ -91,17 +91,17 @@ export default async function HomePage() {
 
             {/* Travel */}
             <Link href="/travel" className="group">
-              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-racing-green hover:shadow-lg">
-                <div className="h-12 w-12 bg-racing-green/10 flex items-center justify-center mb-4">
-                  <Train className="h-6 w-6 text-racing-green" />
+              <div className="border border-border p-6 h-full transition-all duration-300 hover:border-navy hover:shadow-lg">
+                <div className="h-12 w-12 bg-navy/10 flex items-center justify-center mb-4">
+                  <Train className="h-6 w-6 text-gold-dark" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-racing-green transition-colors">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2 group-hover:text-navy transition-colors">
                   Travel & Transport
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4">
                   How to get here by train, bus or car. Parking, EV charging and more.
                 </p>
-                <span className="text-racing-green text-sm font-medium inline-flex items-center gap-1">
+                <span className="text-navy text-sm font-medium inline-flex items-center gap-1">
                   Plan Your Visit <ArrowRight className="h-3 w-3" />
                 </span>
               </div>
@@ -111,7 +111,7 @@ export default async function HomePage() {
 
         {/* Featured / Upcoming Events */}
         {upcomingEvents.length > 0 && (
-          <section id="events" className="bg-secondary/50 scroll-mt-24">
+          <section id="events" className="bg-navy/5 scroll-mt-24">
             <div className="container mx-auto px-4 py-16">
               <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
                 <div>
@@ -124,7 +124,7 @@ export default async function HomePage() {
                 </div>
                 <Link
                   href="/events"
-                  className="text-racing-green font-medium inline-flex items-center gap-1 hover:underline"
+                  className="text-navy font-medium inline-flex items-center gap-1 hover:underline"
                 >
                   View all events <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -173,7 +173,7 @@ export default async function HomePage() {
               )}
               <Link
                 href={settings?.aboutLinkUrl || '/about'}
-                className="inline-flex items-center gap-2 text-racing-green font-medium mt-6 hover:underline"
+                className="inline-flex items-center gap-2 text-navy font-medium mt-6 hover:underline"
               >
                 {settings?.aboutLinkText || 'Learn more about Shaftesbury'} <ArrowRight className="h-4 w-4" />
               </Link>

@@ -51,7 +51,7 @@ const HeroSection = ({ settings }: HeroSectionProps) => {
             style={{ animationDelay: '0.3s' }}
           >
             <a href="#explore">
-              <Button variant="hero" size="xl" className="gap-2 w-full sm:w-auto bg-white text-racing-green hover:bg-white/90">
+              <Button variant="hero" size="xl" className="gap-2 w-full sm:w-auto bg-gold text-navy hover:bg-gold-light font-semibold">
                 Explore Shaftesbury
                 <ArrowRight className="h-5 w-5" />
               </Button>

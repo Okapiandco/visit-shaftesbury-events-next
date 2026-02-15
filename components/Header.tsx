@@ -22,16 +22,21 @@ const Header = () => {
   const isActive = (path: string) => pathname === path || (path !== '/' && pathname.startsWith(path));
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background border-b border-border">
+    <header className="sticky top-0 z-50 w-full bg-background border-b-2 border-gold/30">
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
+            <img
+              src="/logo.png"
+              alt="Visit Shaftesbury"
+              className="h-14 w-14 object-contain"
+            />
             <div className="flex flex-col">
               <span className="text-xs tracking-[0.3em] text-racing-green font-semibold uppercase">
                 Visit
               </span>
-              <span className="text-2xl font-display font-bold tracking-tight text-racing-green -mt-1">
+              <span className="text-2xl font-display font-bold tracking-tight text-navy -mt-1">
                 SHAFTESBURY
               </span>
             </div>
@@ -43,9 +48,9 @@ const Header = () => {
               <Link
                 key={path}
                 href={path}
-                className={`text-sm font-medium tracking-wide transition-colors hover:text-racing-green ${
+                className={`text-sm font-medium tracking-wide transition-colors hover:text-navy ${
                   isActive(path)
-                    ? 'text-racing-green border-b-2 border-racing-green pb-1'
+                    ? 'text-navy border-b-2 border-gold pb-1'
                     : 'text-muted-foreground'
                 }`}
               >
@@ -57,7 +62,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-4">
             <Link href="/submit">
-              <Button variant="outline" size="default" className="gap-2 uppercase tracking-wide text-xs border-racing-green text-racing-green hover:bg-racing-green hover:text-white">
+              <Button variant="outline" size="default" className="gap-2 uppercase tracking-wide text-xs border-navy text-navy hover:bg-navy hover:text-white">
                 <Plus className="h-4 w-4" />
                 Submit Event
               </Button>
@@ -85,7 +90,7 @@ const Header = () => {
                   href={path}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`text-sm font-medium tracking-wide py-2 ${
-                    isActive(path) ? 'text-racing-green' : 'text-muted-foreground'
+                    isActive(path) ? 'text-navy' : 'text-muted-foreground'
                   }`}
                 >
                   {label}
